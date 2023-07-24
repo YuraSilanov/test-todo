@@ -1,19 +1,19 @@
 <template>
   <v-app>
-    <v-main>
-      <Todo />
+    <v-main class="pt-5">
+      <TodoList />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Todo from "./components/Todo";
+import TodoList from "./components/TodoList";
 
 export default {
   name: "App",
 
   components: {
-    Todo,
+    TodoList,
   },
 };
 </script>
