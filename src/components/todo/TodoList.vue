@@ -31,16 +31,20 @@
             <v-checkbox
               :value="task.done"
               color="primary"
-              @click="changeDoneTask(task.id)"
+              @click="$emit('changeDoneTask', task.id)"
             >
             </v-checkbox>
             <v-btn icon class="ml-1">
-              <v-icon color="primary lighten-1" @click="changeEditMode(task.id)"
+              <v-icon
+                color="primary lighten-1"
+                @click="$emit('changeEditMode', task.id)"
                 >mdi-pencil</v-icon
               >
             </v-btn>
             <v-btn icon>
-              <v-icon color="primary lighten-1" @click="removeTask(task.id)"
+              <v-icon
+                color="primary lighten-1"
+                @click="$emit('removeTask', task.id)"
                 >mdi-delete</v-icon
               >
             </v-btn>
@@ -56,21 +60,18 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
-
 export default {
   name: "TodoList",
+  props: {
+    todoList: {
+      type: Array,
+    },
+  },
   data: () => ({
     rules: {
       required: (value) => !!value || "Required.",
     },
   }),
-  computed: {
-    ...mapGetters(["todoList"]),
-  },
-  methods: {
-    ...mapMutations(["changeEditMode", "changeDoneTask", "removeTask"]),
-  },
 };
 </script>
 

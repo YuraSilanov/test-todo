@@ -1,7 +1,12 @@
 <template>
   <div class="todo-block">
-    <TodoCreate />
-    <TodoList />
+    <TodoCreate @addTask="addTask" />
+    <TodoList
+      :todoList="todoList"
+      @changeEditMode="changeEditMode"
+      @changeDoneTask="changeDoneTask"
+      @removeTask="removeTask"
+    />
     <v-btn class="mt-3" color="primary" @click="printConsole">Save</v-btn>
   </div>
 </template>
@@ -9,7 +14,7 @@
 <script>
 import TodoCreate from "./TodoCreate.vue";
 import TodoList from "./TodoList.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "TodoBlock",
@@ -18,6 +23,10 @@ export default {
     ...mapGetters(["todoList"]),
   },
   methods: {
+    ...mapMutations(["changeEditMode", "changeDoneTask", "removeTask"]),
+    addTask(value) {
+      this.$store.commit("addTask", value);
+    },
     printConsole() {
       const data = this.todoList.map((task, index) => {
         return {

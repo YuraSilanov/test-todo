@@ -27,7 +27,7 @@ export default {
   }),
   methods: {
     addTask() {
-      this.$store.commit("addTask", this.newTaskName);
+      this.$emit("addTask", this.newTaskName);
       this.addTaskKey = this.addTaskKey === 0 ? 1 : 0;
       this.newTaskName = "";
     },
