@@ -7,9 +7,15 @@ export default new Vuex.Store({
   state: {
     todoList: [],
   },
+  getters: {
+    todoList(state) {
+      return state.todoList;
+    },
+  },
   mutations: {
     addTask(state, name) {
       if (!name) return;
+
       state.todoList.push({
         id: Date.now(),
         name,
@@ -19,11 +25,11 @@ export default new Vuex.Store({
     },
     changeEditMode(state, id) {
       const task = state.todoList.find((task) => task.id === id);
-      if (task && task.name) {
+      if (task?.name) {
         task.editMode = !task.editMode;
       }
     },
-    changeStatusTask(state, id) {
+    changeDoneTask(state, id) {
       const task = state.todoList.find((task) => task.id === id);
       if (task) {
         task.done = !task.done;
